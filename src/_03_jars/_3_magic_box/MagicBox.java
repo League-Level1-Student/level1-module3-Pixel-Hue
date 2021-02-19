@@ -15,10 +15,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
+
+	JFrame frame;
 
 	/*
 	 * We are going to hide secrets within the magic box. 
@@ -37,6 +39,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	 *     
 	 */
 
+
 	BufferedImage backgroundImage;
 
 
@@ -51,12 +54,13 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	}
 
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+		frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.addMouseListener(this);
 	}
 
 	private void loadBackgroundImage() throws Exception {
@@ -76,6 +80,15 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getX() > 190 && e.getX() < 200 && e.getY() > 540 && e.getX() < 560) {
+			MediaPalace o = new MediaPalace();
+			JLabel l = o.loadImageFromWithinProject("1200px-SpongeBob_SquarePants_character.svg.jpg");
+			add(l);
+			frame.pack();
+			System.out.println("test");
+		}
+		System.err.println(e.getX() + "   " +e.getY());
+		System.out.println("1");
 		
 	}
 
